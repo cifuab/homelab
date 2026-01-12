@@ -54,5 +54,5 @@
 
 > Tip: If RAM gets tight, shut down `win-tools` when not needed, or reduce `obs-stack`/`ci-runner-01` by 1GB each.
 
-### [Talos Kubernetes Cluster Set-up Step-by-Step](https://github.com/anselem-okeke/homelab/blob/main/docs/talos_kubernetes_setup.md)
+### [Talos Kubernetes Cluster `Set-up` `Step-by-Step`](https://github.com/anselem-okeke/homelab/blob/main/docs/talos_kubernetes_setup.md)
 
