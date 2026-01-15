@@ -1,7 +1,7 @@
 ### Talos: Migrate from Flannel → Cilium (VXLAN) + Hubble (UI/Relay)
 
 This runbook documents how I migrated a Talos Kubernetes cluster from Flannel to Cilium, and enabled **Hubble** (Relay + UI).
-(Observability stack + dashboards are documented [here]())
+(Observability stack + dashboards are documented [here](https://github.com/anselem-okeke/homelab/blob/main/docs/observability_setup.md))
 
 ---
 
@@ -167,7 +167,6 @@ talosctl get manifests \
 export TALOSCONFIG=~/talos-prod/talosconfig
 talosctl --endpoints 192.168.0.241 -n 192.168.0.241 get manifests
 ```
-# This is the cleanest enterprise setup (ServiceMonitors, dashboards, alert rules).
 
 - Expected signals:
   - Cilium: Ok 
@@ -179,17 +178,6 @@ talosctl --endpoints 192.168.0.241 -n 192.168.0.241 get manifests
 kubectl -n kube-system get svc | grep -E "hubble|cilium|operator"
 ```
 ---
-
-- # REmove - install prometheus stack 
-```shell
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
-
-kubectl create namespace monitoring
-
-helm upgrade --install kps prometheus-community/kube-prometheus-stack \
-  -n monitoring
-```
 
 ### 4) Remove Flannel (after Cilium is stable)
 
