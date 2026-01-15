@@ -10,7 +10,6 @@
 
 > This document assumes Cilium is already installed and running on all nodes.
 
-# This is the cleanest enterprise setup (ServiceMonitors, dashboards, alert rules).
 ---
 ```yaml
 prometheus:
