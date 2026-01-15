@@ -64,7 +64,7 @@ df -hT
 
   - Disk: safe if you expand (not shrink). Still, best practice is to have a snapshot/backup before resizing.
 
-- If you paste the output of:
+- check:
 ```shell
 lsblk
 df -hT
