@@ -1,4 +1,4 @@
-## Enterprise rollout approach for Cilium policies
+# Enterprise rollout approach for Cilium policies
 
 ![img](../../img/cilium-policy.svg)
 
