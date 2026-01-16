@@ -5,7 +5,7 @@ This runbook documents how I migrated a Talos Kubernetes cluster from Flannel to
 
 ---
 
-### 0) Environment details (what we had)
+### 0) Environment details (what I had)
 
 ### Cluster networking (before)
 - **CNI:** Flannel (DaemonSet `kube-flannel` in `kube-system`)
