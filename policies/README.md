@@ -1,9 +1,8 @@
 # Cilium Policy  (L3/L4 + L7) — Step-by-step Runbook
 
-<p align="center">
-  <img src="../img/cilium-policy.png" width="400" height="900" />
-  <img src="../img/cilium-policy2.png" width="400" height="700" />
-</p>
+![img](../img/cilium-policy.svg)
+![img](../img/cilium-policy2.svg)
+
 
 > **Goal:** reliable L3 | L4 | L7 visibility + correct “namespace evidence” for drops (src vs dst) + safety guardrails (BPF pressure).
 
