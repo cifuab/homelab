@@ -1,0 +1,6 @@
+resources:
+  - ns/namespace.yaml
+  - server/nginx-cm.yaml
+  - server/deploy.yaml
+  - server/svc.yaml
+  - client/pod.yaml

@@ -4,6 +4,4 @@ kind: Kustomization
 namespace: policy-lab
 
 resources:
-  - ../../apps/policy-lab
-  - ../../baselines
-  - allow-client-to-server.yaml
+  - ../../base

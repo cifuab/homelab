@@ -36,9 +36,10 @@ hubble:
   metrics:
     enabled:
       - dns:query;ignoreAAAA
-      - drop
+      - drop:labelsContext=source_namespace,destination_namespace,traffic_direction
       - tcp
-      - flow
+      - flow:labelsContext=source_namespace,source_workload,destination_namespace,destination_workload,traffic_direction
+      - httpV2:labelsContext=source_namespace,source_workload,destination_namespace,destination_workload,traffic_direction
     serviceMonitor:
       enabled: true
 

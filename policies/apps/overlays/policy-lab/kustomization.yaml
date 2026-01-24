@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: policy-lab
+
+resources:
+  - ../../base
+  - allow-client-egress-to-server.yaml
+  - allow-client-to-server.yaml
+  - l7-allow-only-get-root.yaml
+
+
+patches:
+  - target:
+      kind: Namespace
+      name: policy-PLACEHOLDER
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: policy-lab

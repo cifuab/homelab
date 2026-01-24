@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-l7-lab
+data:
+  default.conf: |
+    server {
+      listen 8080;
+      location = / {
+        return 200 "OK /\n";
+      }
+      location = /admin {
+        return 200 "OK /admin\n";
+      }
+    }
