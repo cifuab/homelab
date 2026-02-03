@@ -260,4 +260,4 @@ nc -vz 192.168.0.245 50000
   - `talosctl machineconfig patch` merges arrays; it won’t remove old interface entries. 
   - When you need a clean network config, rewrite `machine.network.interfaces` explicitly.
 
-### [Trouble Shooting Section]()
+### [Trouble Shooting Section](https://github.com/anselem-okeke/homelab/blob/main/docs/talos-node-troubleshooting.md)

@@ -10,3 +10,18 @@ parameters:
   numberOfReplicas: "2"   # 2 Longhorn nodes => 2 replicas
   fsType: "ext4"
 
+
+
+machine:
+  network:
+    nameservers:
+      - 192.168.0.1
+    interfaces:
+      - deviceSelector:
+          hardwareAddr: "bc:24:11:8c:5b:e3"
+        dhcp: false
+        addresses:
+          - 192.168.0.245/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 192.168.0.1

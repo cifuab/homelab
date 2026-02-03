@@ -22,6 +22,9 @@ alertmanager:
               storage: 5Gi
 
 grafana:
+  deploymentStrategy:
+    type: Recreate
+
   persistence:
     enabled: true
     type: pvc
@@ -29,5 +32,6 @@ grafana:
     accessModes:
       - ReadWriteOnce
     size: 10Gi
+
 
 
