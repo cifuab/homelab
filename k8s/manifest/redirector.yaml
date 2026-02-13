@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redirector
+  namespace: policy-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redirector
+  template:
+    metadata:
+      labels:
+        app: redirector
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: conf
+          mountPath: /etc/nginx/conf.d
+      volumes:
+      - name: conf
+        configMap:
+          name: redirector-conf
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redirector-conf
+  namespace: policy-lab
+data:
+  default.conf: |
+    server {
+      listen 80;
+      location / {
+        return 302 /new;
+      }
+      location /new {
+        return 200 "ok\n";
+      }
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redirector
+  namespace: policy-lab
+spec:
+  selector:
+    app: redirector
+  ports:
+  - port: 80
+    targetPort: 80

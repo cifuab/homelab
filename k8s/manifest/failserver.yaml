@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: failserver
+  namespace: policy-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: failserver
+  template:
+    metadata:
+      labels:
+        app: failserver
+    spec:
+      containers:
+      - name: http
+        image: hashicorp/http-echo:1.0
+        args: ["-listen=:5678", "-status-code=500", "-text=fail"]
+        ports:
+        - containerPort: 5678
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: failserver
+  namespace: policy-lab
+spec:
+  selector:
+    app: failserver
+  ports:
+  - port: 80
+    targetPort: 5678

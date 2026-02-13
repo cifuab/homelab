@@ -19,12 +19,30 @@ tunnelProtocol: "vxlan"
 # Pod CIDR:     10.244.0.0/16
 # Service CIDR: 10.96.0.0/12
 
+
+resources:
+  requests:
+    cpu: "1"
+    memory: 512Mi
+  limits:
+    cpu: "3"
+    memory: 2Gi
+
+
 # Enterprise-grade visibility
 hubble:
   enabled: true
 
   relay:
     enabled: true
+    replicas: 2
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      limits:
+        cpu: "1"
+        memory: 512Mi
     prometheus:
       enabled: true
       serviceMonitor:
@@ -38,10 +56,36 @@ hubble:
       - dns:query;ignoreAAAA
       - drop:labelsContext=source_namespace,destination_namespace,traffic_direction
       - tcp
+      - http
       - flow:labelsContext=source_namespace,source_workload,destination_namespace,destination_workload,traffic_direction
       - httpV2:labelsContext=source_namespace,source_workload,destination_namespace,destination_workload,traffic_direction
     serviceMonitor:
       enabled: true
+
+
+# hubble:
+#   enabled: true
+#
+#   relay:
+#     enabled: true
+#     prometheus:
+#       enabled: true
+#       serviceMonitor:
+#         enabled: true
+#
+#   ui:
+#     enabled: true
+#
+#   metrics:
+#     enabled:
+#       - dns:query;ignoreAAAA
+#       - drop:labelsContext=source_namespace,destination_namespace,traffic_direction
+#   #    - httpV2:labelsContext=source_namespace,destination_namespace,traffic_direction
+#   #    - tcp
+#   #    - flow:labelsContext=source_namespace,source_workload,destination_namespace,destination_workload,traffic_direction
+#   #    - httpV2:labelsContext=source_namespace,source_workload,destination_namespace,destination_workload,traffic_direction
+#     serviceMonitor:
+#       enabled: true
 
 # --- Talos-specific requirements ---
 cgroup:

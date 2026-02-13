@@ -57,7 +57,7 @@ grafana:
     size: 10Gi
 ```
 
-- Then upgrade (keep your existing release name kps and namespace monitoring):
+- Then upgrade keep existing release name kps and namespace monitoring:
 
 ```shell
 helm upgrade kps prometheus-community/kube-prometheus-stack \
