@@ -603,6 +603,6 @@ If legend shows `{}`:
   - [Part of this docs involves loki setup](https://github.com/anselem-okeke/homelab/blob/main/docs/falco-security.md)
   - [Grafana provisioning the infrastructure way](https://github.com/anselem-okeke/homelab/blob/main/docs/grafana-config-provisioning.md)
   - [Grafana audit SOC dashboard.json import only]()
-  - [Grafana audit SOC dashboard.json infrastructure provisioning]()
+  - [Grafana audit SOC dashboard.json infrastructure provisioning](https://github.com/anselem-okeke/homelab/blob/main/grafana/panels/audit-soc-dashboard.provision.json)
   - [Step for simulating grafan audit SOC]()
 
