@@ -393,3 +393,30 @@ helm repo update
 helm upgrade --install loki grafana/loki \
   -n logging -f /mnt/data/homelab/loki/loki-values.yaml
 ```
+
+### Install ServiceMonitor for Prometheus
+```shell
+cat > /mnt/data/homelab/monitoring/falco/falcosidekick-servicemonitor.yaml <<'YAML'
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: falcosidekick
+  namespace: falco
+  labels:
+    release: kps
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: falcosidekick
+      app.kubernetes.io/instance: falco
+  namespaceSelector:
+    matchNames:
+      - falco
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s
+YAML
+
+kubectl apply -f /mnt/data/homelab/monitoring/falco/falcosidekick-servicemonitor.yaml
+```
