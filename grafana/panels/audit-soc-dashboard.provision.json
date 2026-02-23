@@ -1160,7 +1160,6 @@
             }
           },
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1170,11 +1169,11 @@
               },
               {
                 "color": "yellow",
-                "value": 0.0005
+                "value": 2
               },
               {
                 "color": "dark-red",
-                "value": 0.005
+                "value": 5
               }
             ]
           },
@@ -1217,12 +1216,191 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "dark-red",
+                "value": 5
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 0,
+        "y": 20
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "100 *\r\n(\r\n  sum(\r\n    rate(\r\n      {job=\"k8s-audit\"}\r\n      | json stage=\"stage\", verb=\"verb\", res=\"objectRef.resource\", sub=\"objectRef.subresource\"\r\n      | stage=\"ResponseComplete\"\r\n      | (\r\n          sub=~\"exec|portforward|attach\"\r\n          or (res=\"secrets\" and verb=~\"get|list\")\r\n          or (res=~\"roles|rolebindings|clusterroles|clusterrolebindings\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n          or (res=~\"daemonsets|deployments|statefulsets\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n          or (res=~\"mutatingwebhookconfigurations|validatingwebhookconfigurations|apiservices|customresourcedefinitions\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n        )\r\n    [5m])\r\n  )\r\n  /\r\n  sum(rate({job=\"k8s-audit\"}[5m]))\r\n) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Signal ratio (high-signal / total)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 0.05,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.0005
+              },
+              {
+                "color": "red",
+                "value": 0.005
+              }
+            ]
+          },
+          "unit": "ops/s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 4,
+        "y": 20
+      },
+      "id": 33,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "sum(\r\n  rate(\r\n    {job=\"k8s-audit\"}\r\n    | json stage=\"stage\", verb=\"verb\", res=\"objectRef.resource\", sub=\"objectRef.subresource\", code=\"responseStatus.code\"\r\n    | stage=\"ResponseComplete\"\r\n    | (\r\n        sub=~\"exec|portforward|attach\"\r\n        or (res=\"secrets\" and verb=~\"get|list\")\r\n        or (res=~\"roles|rolebindings|clusterroles|clusterrolebindings\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n        or (res=~\"daemonsets|deployments|statefulsets\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n        or (res=~\"mutatingwebhookconfigurations|validatingwebhookconfigurations|apiservices|customresourcedefinitions\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n      )\r\n  [5m])\r\n) or vector(0)",
+          "legendFormat": "High Signal",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "High-signal events/sec (cluster)",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 27
       },
       "id": 11,
       "panels": [],
@@ -1300,7 +1478,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 21
+        "y": 28
       },
       "id": 4,
       "options": {
@@ -1321,7 +1499,7 @@
         {
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum(\r\n  rate(\r\n    {job=\"k8s-audit\", node=~\"$node\"}\r\n    | json code=\"responseStatus.code\"\r\n    | code=~\"401|403\"\r\n    [5m]\r\n  )\r\n)\r\n",
+          "expr": "sum(\r\n  rate(\r\n    {job=\"k8s-audit\", node=~\"$node\"}\r\n    | json code=\"responseStatus.code\"\r\n    | code=~\"401|403\"\r\n    [5m]\r\n  )\r\n) or vector(0)\r\n",
           "legendFormat": "401/403",
           "queryType": "range",
           "refId": "A"
@@ -1396,7 +1574,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 21
+        "y": 28
       },
       "id": 5,
       "options": {
@@ -1417,7 +1595,7 @@
         {
           "direction": "backward",
           "editorMode": "code",
-          "expr": "topk(10,\r\n  sum by (verb) (\r\n    rate({job=\"k8s-audit\"}\r\n    | json verb=\"verb\", code=\"responseStatus.code\"\r\n    | code=~\"401|403\"\r\n    [5m])\r\n  )\r\n)\r\n",
+          "expr": "topk(10,\r\n  sum by (verb) (\r\n    rate({job=\"k8s-audit\"}\r\n    | json verb=\"verb\", code=\"responseStatus.code\"\r\n    | code=~\"401|403\"\r\n    [5m])\r\n  )\r\n) or vector(0)\r\n",
           "queryType": "range",
           "refId": "A"
         }
@@ -1491,7 +1669,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 21
+        "y": 28
       },
       "id": 6,
       "options": {
@@ -1512,7 +1690,7 @@
         {
           "direction": "backward",
           "editorMode": "code",
-          "expr": "topk(\r\n  10,\r\n  sum by (user)(\r\n    rate(\r\n      {job=\"k8s-audit\", node=~\"$node\"}\r\n      | json user=\"user.username\", code=\"responseStatus.code\"\r\n      | code=~\"401|403\"\r\n      [5m]\r\n    )\r\n  )\r\n)\r\n",
+          "expr": "topk(\r\n  10,\r\n  sum by (user)(\r\n    rate(\r\n      {job=\"k8s-audit\", node=~\"$node\"}\r\n      | json user=\"user.username\", code=\"responseStatus.code\"\r\n      | code=~\"401|403\"\r\n      [5m]\r\n    )\r\n  )\r\n) or vector(0)\r\n",
           "queryType": "range",
           "refId": "A"
         }
@@ -1526,7 +1704,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 36
       },
       "id": 12,
       "panels": [],
@@ -1604,7 +1782,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 30
+        "y": 37
       },
       "id": 15,
       "options": {
@@ -1705,7 +1883,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 30
+        "y": 37
       },
       "id": 7,
       "options": {
@@ -1806,7 +1984,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 30
+        "y": 37
       },
       "id": 8,
       "options": {
@@ -1837,12 +2015,221 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 0.05,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 0.000001
+              },
+              {
+                "color": "dark-red",
+                "value": 0.001
+              }
+            ]
+          },
+          "unit": "ops/s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 45
+      },
+      "id": 31,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "sum by (res) (\r\n  rate(\r\n    {job=\"k8s-audit\", node=~\"$node\"}\r\n    | json stage=\"stage\", verb=\"verb\", res=\"objectRef.resource\", user=\"user.username\"\r\n    | stage=\"ResponseComplete\"\r\n    | res=~\"mutatingwebhookconfigurations|validatingwebhookconfigurations|apiservices|customresourcedefinitions\"\r\n    | verb=~\"create|update|patch|delete|deletecollection\"\r\n    | user !~ \"system:kube-controller-manager|system:apiserver|system:kube-scheduler|system:node:.*\"\r\n  [5m])\r\n) or vector(0)",
+          "legendFormat": "admission_changes",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Admission & Webhook changes — rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 0.001
+              },
+              {
+                "color": "dark-red",
+                "value": 0.01
+              }
+            ]
+          },
+          "unit": "ops/s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 45
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "sum(\r\n  rate(\r\n    {job=\"k8s-audit\", node=~\"$node\"}\r\n    | json stage=\"stage\", verb=\"verb\", res=\"objectRef.resource\", user=\"user.username\"\r\n    | stage=\"ResponseComplete\"\r\n    | res=\"secrets\"\r\n    | verb=~\"get|list\"\r\n    | user !~ \"system:kube-controller-manager|system:apiserver|system:kube-scheduler\"\r\n  [5m])\r\n) or vector(0)",
+          "legendFormat": "secrets_reads",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Secrets reads (get/list) — rate",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 53
       },
       "id": 13,
       "panels": [],
@@ -1854,11 +2241,178 @@
         "type": "loki",
         "uid": "P8E80F9AEF21F6940"
       },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
-        "h": 8,
+        "h": 5,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 54
+      },
+      "id": 32,
+      "options": {
+        "cellHeight": "sm",
+        "showHeader": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "topk(10,\r\n  sum by (user) (\r\n    count_over_time(\r\n      {job=\"k8s-audit\", node=~\"$node\"}\r\n      | json stage=\"stage\", user=\"user.username\", verb=\"verb\", res=\"objectRef.resource\", sub=\"objectRef.subresource\"\r\n      | stage=\"ResponseComplete\"\r\n      | (\r\n          sub=~\"exec|portforward|attach\"\r\n          or (res=\"secrets\" and verb=~\"get|list\")\r\n          or (res=~\"roles|rolebindings|clusterroles|clusterrolebindings\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n          or (res=~\"daemonsets|deployments|statefulsets\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n          or (res=~\"mutatingwebhookconfigurations|validatingwebhookconfigurations|apiservices|customresourcedefinitions\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n        )\r\n      | user !~ \"system:kube-controller-manager|system:apiserver|system:kube-scheduler|system:node:.*\"\r\n    [5m])\r\n  )\r\n) or vector(0)",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Top high-risk actors (5m)",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #A": "count_5m"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "count_5m"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      },
+      "id": 28,
+      "options": {
+        "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
+        "enableLogDetails": true,
+        "showControls": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{job=\"k8s-audit\", node=~\"$node\"}\r\n| json verb=\"verb\", stage=\"stage\",\r\n       user=\"user.username\",\r\n       ns=\"objectRef.namespace\",\r\n       res=\"objectRef.resource\",\r\n       sub=\"objectRef.subresource\",\r\n       code=\"responseStatus.code\",\r\n       uri=\"requestURI\",\r\n       ua=\"userAgent\"\r\n| stage=\"ResponseComplete\"\r\n| (\r\n    sub=~\"exec|portforward|attach\"\r\n    or (res=\"secrets\" and verb=~\"get|list\")\r\n    or (res=~\"serviceaccounts|roles|rolebindings|clusterroles|clusterrolebindings\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n    or (res=~\"daemonsets|deployments|statefulsets\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n    or (res=~\"mutatingwebhookconfigurations|validatingwebhookconfigurations|apiservices|customresourcedefinitions\" and verb=~\"create|update|patch|delete|deletecollection\")\r\n    or (res=\"nodes\" and verb=~\"patch|update\")\r\n  )\r\n| res !~ \"leases|events\"\r\n| ns !~ \"kube-node-lease\"\r\n| user !~ \"system:node:.*|system:kube-proxy|system:serviceaccount:longhorn-system:.*\"\r\n| line_format \"code={{.code}} verb={{.verb}} user={{.user}} ns={{.ns}} res={{.res}} sub={{.sub}} uri={{.uri}} ua={{.ua}}\"\r\n",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": ": Latest high-risk actions (RBAC / Secrets / Exec)",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 65
+      },
+      "id": 29,
+      "options": {
+        "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
+        "enableLogDetails": true,
+        "showControls": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{job=\"k8s-audit\", node=~\"$node\"}\r\n| json verb=\"verb\", stage=\"stage\",\r\n       user=\"user.username\",\r\n       ns=\"objectRef.namespace\",\r\n       res=\"objectRef.resource\",\r\n       sub=\"objectRef.subresource\",\r\n       code=\"responseStatus.code\",\r\n       uri=\"requestURI\",\r\n       ua=\"userAgent\"\r\n| stage=\"ResponseComplete\"\r\n| (\r\n    (res=\"secrets\" and verb=\"watch\")\r\n    or (res=\"serviceaccounts\" and sub=\"token\" and verb=\"create\" and user=~\"system:kube-controller-manager|system:kube-scheduler|system:apiserver\")\r\n  )\r\n| res !~ \"leases|events\"\r\n| ns !~ \"kube-node-lease\"\r\n| line_format \"code={{.code}} verb={{.verb}} user={{.user}} ns={{.ns}} res={{.res}} sub={{.sub}} uri={{.uri}} ua={{.ua}}\"\r\n",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Sensitive Baseline (Proof of Life)",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 72
       },
       "id": 14,
       "options": {
@@ -1875,7 +2429,7 @@
         {
           "direction": "backward",
           "editorMode": "code",
-          "expr": "{job=\"k8s-audit\", node=~\"$node\"}\r\n| json verb=\"verb\", stage=\"stage\",\r\n       user=\"user.username\",\r\n       ns=\"objectRef.namespace\",\r\n       res=\"objectRef.resource\",\r\n       code=\"responseStatus.code\",\r\n       uri=\"requestURI\",\r\n       ua=\"userAgent\"\r\n| stage=\"ResponseComplete\"\r\n| code >= 300\r\n| line_format \"code={{.code}} verb={{.verb}} user={{.user}} ns={{.ns}} res={{.res}} uri={{.uri}} ua={{.ua}}\"",
+          "expr": "{job=\"k8s-audit\", node=~\"$node\"}\r\n| json verb=\"verb\", stage=\"stage\",\r\n       user=\"user.username\",\r\n       ns=\"objectRef.namespace\",\r\n       res=\"objectRef.resource\",\r\n       code=\"responseStatus.code\",\r\n       uri=\"requestURI\",\r\n       ua=\"userAgent\"\r\n| stage=\"ResponseComplete\"\r\n| code != \"\"\r\n| code >= 300\r\n| user !~ \"system:serviceaccount:longhorn-system:.*\"\r\n| (res!=\"ciliumendpoints\" or code!=404)\r\n| line_format \"code={{.code}} verb={{.verb}} user={{.user}} ns={{.ns}} res={{.res}} uri={{.uri}} ua={{.ua}}\"",
           "queryType": "range",
           "refId": "A"
         }

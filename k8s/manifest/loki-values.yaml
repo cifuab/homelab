@@ -4,37 +4,47 @@ chunksCache:
 deploymentMode: SingleBinary
 
 loki:
-  auth_enabled: false
+  # ingestion limits (prevents dropped audit logs during bursts)
+  limitsConfig:
+    ingestion_rate_mb: 16
+    ingestion_burst_size_mb: 32
 
-  extraEnvFrom:
-    - secretRef:
-        name: loki-s3-creds
+  # guaranteed config (this is what ends up in the loki ConfigMap)
+  structuredConfig:
+    auth_enabled: false
 
-  commonConfig:
-    replication_factor: 1
+    common:
+      replication_factor: 1
+      path_prefix: /var/loki
+      storage:
+        s3:
+          endpoint: loki-minio.logging.svc:9000
+          bucketnames: loki-chunks
+          s3forcepathstyle: true
+          insecure: true
 
-  schemaConfig:
-    configs:
-      - from: "2024-04-01"
-        store: tsdb
-        object_store: s3
-        schema: v13
-        index:
-          prefix: loki_index_
-          period: 24h
+    schema_config:
+      configs:
+        - from: "2024-04-01"
+          store: tsdb
+          object_store: s3
+          schema: v13
+          index:
+            prefix: loki_index_
+            period: 24h
 
-  storage:
-    type: s3
-    bucketNames:
-      chunks: loki-chunks
-      ruler: loki-ruler
-      admin: loki-admin
+    storage_config:
+      tsdb_shipper:
+        active_index_directory: /var/loki/index
+        cache_location: /var/loki/cache
 
-    s3:
-      endpoint: http://loki-minio.logging.svc.cluster.local:9000     #important using in another cluster
-      region: eu-central-1   #important using in another cluster
-      s3ForcePathStyle: true
-      insecure: true
+    ruler:
+      storage:
+        type: s3
+        s3:
+          bucketnames: loki-ruler
+      wal:
+        dir: /var/loki/ruler-wal
 
 minio:
   enabled: true
@@ -45,7 +55,7 @@ minio:
 
   persistence:
     enabled: true
-    storageClass: longhorn-retain    #important using in another cluster
+    storageClass: longhorn-retain
     size: 20Gi
 
   buckets:
@@ -55,6 +65,22 @@ minio:
 
 singleBinary:
   replicas: 1
+  resources:
+    requests:
+      cpu: 200m
+      memory: 1Gi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+
+sidecar:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
 
 # Zero out replica counts of other modes (important!)
 backend:
