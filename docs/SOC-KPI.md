@@ -1,6 +1,7 @@
 ## Kubernetes Audit SOC KPI
+![img](../img/kpi.gif)
 
-This is a drop-in, step-by-step runbook to reproduce the **business KPIs** we measured:
+This is a step-by-step runbook to reproduce the **business KPIs** measured:
 1) Audit volume + Signal ratio  
 2) MTTD / detection latency  
 3) Deny baseline vs spike (401/403)  
