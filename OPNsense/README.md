@@ -35,6 +35,9 @@ The goal is to install OPNsense as the central firewall/router layer for the hom
 
 ## 3. Assumptions
 
+![img](./img/proxmox.png)
+![img](./img/proxmox2.png)
+
 This guide assumes:
 
 - OPNsense will be installed on a physical firewall appliance or as a Proxmox VM.
@@ -54,13 +57,13 @@ Adjust the IP addresses if your environment uses a different subnet.
 
 ## 4. Download OPNsense ISO
 
-Download the OPNsense installer image from the official OPNsense website:
+[Download the OPNsense installer image from the official OPNsense website](https://opnsense.org/download/)
 
-```text
-https://opnsense.org/download/
-```
+
 
 Recommended image type:
+
+![img](./img/installation.PNG)
 
 ```text
 Architecture: amd64
