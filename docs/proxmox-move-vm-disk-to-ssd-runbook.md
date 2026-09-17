@@ -1,0 +1,286 @@
+# Proxmox Runbook: Move VM Disk from `local-lvm` to `ssd-backup`
+
+## Purpose
+
+Use this runbook when `local-lvm` is almost full and you want to move an existing VM disk to another Proxmox storage, for example `ssd-backup`, without deleting the VM.
+
+Example case:
+
+```text
+VM 115 Window-Server
+Disk before: local-lvm:vm-115-disk-1
+Disk after:  ssd-backup:115/vm-115-disk-0.raw
+```
+
+---
+
+## 1. Check storage usage
+
+Run on the Proxmox host:
+
+```bash
+pvesm status
+```
+
+Example output:
+
+```text
+local-lvm   lvmthin   active   ...   97.01%
+ssd-backup  dir       active   ...   67.99%
+```
+
+If `local-lvm` is almost full and `ssd-backup` has free space, moving disks can help.
+
+---
+
+## 2. Confirm `ssd-backup` supports VM disks
+
+Check storage configuration:
+
+```bash
+cat /etc/pve/storage.cfg
+```
+
+Look for `ssd-backup`.
+
+It must include `images`:
+
+```text
+dir: ssd-backup
+        path /mnt/pve/ssd-backup
+        content vztmpl,snippets,images,backup,iso
+        is_mountpoint 1
+```
+
+If `images` is missing, enable it:
+
+```bash
+pvesm set ssd-backup --content images,backup,vztmpl,snippets,iso
+```
+
+Confirm again:
+
+```bash
+cat /etc/pve/storage.cfg
+```
+
+---
+
+## 3. Check the VM disk name
+
+Example VM ID:
+
+```text
+115
+```
+
+Run:
+
+```bash
+qm config 115
+```
+
+Find the main disk line.
+
+Example:
+
+```text
+ide0: local-lvm:vm-115-disk-1,size=150G
+```
+
+In this example, the disk device name is:
+
+```text
+ide0
+```
+
+Other possible names are:
+
+```text
+scsi0
+sata0
+virtio0
+```
+
+---
+
+## 4. Move the disk
+
+Use this format:
+
+```bash
+qm move_disk <VMID> <DISK_NAME> <TARGET_STORAGE> --delete 1
+```
+
+Example:
+
+```bash
+qm move_disk 115 ide0 ssd-backup --delete 1
+```
+
+Meaning:
+
+```text
+115          = VM ID
+ide0         = disk name from qm config
+ssd-backup   = target storage
+--delete 1   = delete old source disk after successful move
+```
+
+This does **not** delete the VM. It only moves the VM disk.
+
+---
+
+## 5. Verify the move
+
+Run:
+
+```bash
+qm config 115
+```
+
+Before:
+
+```text
+ide0: local-lvm:vm-115-disk-1,size=150G
+```
+
+After:
+
+```text
+ide0: ssd-backup:115/vm-115-disk-0.raw,size=150G
+```
+
+This confirms the disk moved successfully.
+
+---
+
+## 6. Check storage again
+
+Run:
+
+```bash
+pvesm status
+```
+
+`local-lvm` usage should now be lower.
+
+---
+
+## 7. Important notes
+
+### Stopped VMs
+
+A stopped VM does not use CPU or RAM, but its disk still consumes storage.
+
+```text
+Stopped VM = powered off computer
+Disk still exists = storage is still used
+```
+
+### Performance
+
+Moving from internal NVMe `local-lvm` to external or secondary storage may reduce disk performance.
+
+Good candidates to move:
+
+```text
+Windows Server
+Win11
+Less-used VMs
+Test VMs
+Utility VMs
+```
+
+Avoid moving performance-sensitive workloads unless necessary:
+
+```text
+Talos workers
+Longhorn-heavy workloads
+Prometheus
+Loki
+OpenSearch
+Databases
+```
+
+### External disk warning
+
+Do not extend the main Proxmox LVM volume group with an external disk unless it is permanently attached and you understand the risk.
+
+Safer approach:
+
+```text
+Move VM disks to ssd-backup
+```
+
+Riskier approach:
+
+```text
+Add external disk into pve/data LVM pool
+```
+
+If the external disk disconnects after being added to the main LVM pool, Proxmox storage can break.
+
+---
+
+## Quick command summary
+
+```bash
+# Check storage
+pvesm status
+
+# Check storage config
+cat /etc/pve/storage.cfg
+
+# Enable VM disk images on ssd-backup if needed
+pvesm set ssd-backup --content images,backup,vztmpl,snippets,iso
+
+# Check VM config
+qm config 115
+
+# Move disk
+qm move_disk 115 ide0 ssd-backup --delete 1
+
+# Verify
+qm config 115
+
+# Check storage again
+pvesm status
+```
+
+
+## netplan:
+
+```bash
+sudo nano /etc/netplan/50-cloud-init.yaml
+```
+
+Change it to:
+```bash
+network:
+  version: 2
+  ethernets:
+    ens18:
+      dhcp4: false
+      addresses:
+        - 192.168.0.61/24
+      routes:
+        - to: default
+          via: 192.168.0.1
+      nameservers:
+        addresses:
+          - 192.168.0.1
+          - 8.8.8.8
+```
+
+Apply:
+```bash
+sudo netplan apply
+```
+
+Test:
+```bash
+ip a
+ping -c 3 192.168.0.1
+ping -c 3 google.com
+```

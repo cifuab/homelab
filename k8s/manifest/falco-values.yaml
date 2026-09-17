@@ -17,10 +17,17 @@ jsonIncludeOutputProperty: true
 resources:
   requests:
     cpu: 100m
-    memory: 256Mi
+    memory: 512Mi
   limits:
     cpu: "1"
-    memory: 512Mi
+    memory: 1Gi
+# resources:
+#   requests:
+#     cpu: 100m
+#     memory: 256Mi
+#   limits:
+#     cpu: "1"
+#     memory: 512Mi
 
 # Falcosidekick routing layer
 falcosidekick:
@@ -81,7 +88,7 @@ customRules:
       output: "Ignoring known monitoring /proc activity (ns=%k8s.ns.name pod=%k8s.pod.name proc=%proc.name)"
       priority: NOTICE
       tags: [k8s, noise_reduction]
-      enabled: true
+      enabled: false
 
     # Example: if you run "debug pods" in policy-lab, don't blanket-ignore; keep it surgical:
     # Allow *your* known client pod to run curl (adjust pod name if you change it)

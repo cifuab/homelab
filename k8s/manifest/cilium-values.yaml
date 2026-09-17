@@ -38,27 +38,48 @@ gatewayAPI:
 
 resources:
   requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
     cpu: "1"
     memory: 512Mi
-  limits:
-    cpu: "3"
-    memory: 2Gi
+
+
+# resources:
+#   requests:
+#     cpu: "1"
+#     memory: 512Mi
+#   limits:
+#     cpu: "3"
+#     memory: 2Gi
 
 
 # Enterprise-grade visibility
 hubble:
   enabled: true
 
+  # relay:
+  #   enabled: true
+  #   replicas: 2
+  #   resources:
+  #     requests:
+  #       cpu: 200m
+  #       memory: 256Mi
+  #     limits:
+  #       cpu: "1"
+  #       memory: 512Mi
+
   relay:
     enabled: true
-    replicas: 2
+    replicas: 1
     resources:
       requests:
-        cpu: 200m
-        memory: 256Mi
+        cpu: 50m
+        memory: 128Mi
       limits:
-        cpu: "1"
-        memory: 512Mi
+        cpu: 500m
+        memory: 256Mi
+        
     prometheus:
       enabled: true
       serviceMonitor:

@@ -16,7 +16,7 @@ The key lesson:
 Zabbix Server Container
         |
         | Docker bridge network
-        | Source IP: 172.18.0.5
+        | Source IP: 172.18.0.5/16
         |
 Docker Host / Linux VM
         |
@@ -88,6 +88,74 @@ So Zabbix may time out even though SNMP works locally.
 ---
 
 ## Final Working SNMP Configuration
+
+````text
+Linux VM, install SNMP daemon:
+
+sudo apt update
+sudo apt install -y snmpd snmp
+
+Edit config:
+
+sudo nano /etc/snmp/snmpd.conf
+
+###########################################################################
+# System Information
+###########################################################################
+
+sysLocation Homelab
+sysContact Anselem
+sysServices 72
+
+###########################################################################
+# Agent Listening Address
+###########################################################################
+
+agentAddress udp:161,udp6:[::1]:161
+
+###########################################################################
+# Access Control
+###########################################################################
+
+rocommunity public 127.0.0.1
+rocommunity public 192.168.0.0/24
+rocommunity public 172.18.0.0/16
+rocommunity public 10.0.0.0/8
+
+###########################################################################
+# AgentX
+###########################################################################
+
+master agentx
+
+###########################################################################
+# Include extra config files
+###########################################################################
+
+includeDir /etc/snmp/snmpd.conf.d
+
+Restart SNMP:
+
+sudo systemctl restart snmpd
+sudo systemctl enable snmpd
+sudo systemctl status snmpd
+
+Check listening port:
+
+sudo ss -lunp | grep 161
+
+Test locally:
+
+snmpwalk -v2c -c public localhost system
+
+Test from your Zabbix server:
+
+snmpwalk -v2c -c public <linux-vm-ip> system
+
+Example:
+
+snmpwalk -v2c -c public 192.168.0.58 system
+````
 
 File:
 

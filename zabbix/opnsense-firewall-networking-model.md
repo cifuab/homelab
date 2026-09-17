@@ -167,7 +167,7 @@ This second NIC connects Zabbix directly to the OPNsense SERVERS network.
 
 ## Why I Added Static IP to `ens19`
 
-The final netplan configuration was:
+The final netplan `/etc/netplan/50-cloud-init.yaml` configuration was:
 
 ```yaml
 network:
@@ -181,6 +181,8 @@ network:
       addresses:
         - 192.168.20.50/24
 ```
+Then apply:
+- `sudo netplan apply`
 
 ### Meaning
 
@@ -222,7 +224,7 @@ Because `192.168.20.1` is in the same subnet as `192.168.20.50`.
 This is directly connected communication:
 
 ```text
-Zabbix:   192.168.20.50/24
+Zabbix Server:   192.168.20.50/24
 OPNsense: 192.168.20.1/24
 ```
 
@@ -513,3 +515,69 @@ That is why `ens19` was added with a static IP:
 ```
 
 It made Zabbix a proper infrastructure service inside the SERVERS network.
+
+
+---
+
+
+
+
+### Backup notes for simple routing
+
+```text
+Route example
+
+To reach only the 192.168.30.0/24 VLAN through OPNsense, you could add a route like:
+
+sudo ip route add 192.168.30.0/24 via 192.168.20.1 dev ens19
+
+Then ip route show would include something like:
+
+192.168.30.0/24 via 192.168.20.1 dev ens19
+
+Meaning:
+
+To reach 192.168.30.0/24,
+send traffic to gateway 192.168.20.1,
+using interface ens19.
+Another example: internet access through OPNsense
+
+If you wanted Zabbix to use OPNsense as its internet gateway, then the default route would be:
+
+sudo ip route add default via 192.168.20.1 dev ens19
+
+That means:
+
+For everything I do not know directly,
+send it to 192.168.20.1.
+
+Example traffic:
+
+8.8.8.8
+1.1.1.1
+github.com
+google.com
+
+Would go like this:
+
+Zabbix 192.168.20.50
+   |
+   v
+OPNsense 192.168.20.1
+   |
+   v
+Internet
+
+But in your current lab, you probably do not need that because ens18 already has your normal/home network default gateway.
+
+Simple rule
+Same subnet      → no gateway needed
+Different subnet → gateway needed
+Internet         → default gateway needed
+
+For your case:
+
+192.168.20.50 → 192.168.20.1   same subnet      no gateway
+192.168.20.50 → 192.168.30.10  different subnet gateway needed
+192.168.20.50 → 8.8.8.8        internet         default gateway needed
+````

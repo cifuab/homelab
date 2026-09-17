@@ -1,0 +1,1678 @@
+{
+  "dashboardid": "402",
+  "name": "Homelab Infrastructure Overview",
+  "userid": "1",
+  "private": "1",
+  "display_period": "30",
+  "auto_start": "1",
+  "uuid": "",
+  "pages": [
+    {
+      "dashboard_pageid": "25090",
+      "name": "Current Problems - full width",
+      "display_period": "0",
+      "widgets": [
+        {
+          "widgetid": "97449",
+          "type": "problems",
+          "name": "Current Problems",
+          "x": "0",
+          "y": "0",
+          "width": "72",
+          "height": "5",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "2",
+              "name": "groupids.0",
+              "value": "2"
+            },
+            {
+              "type": "2",
+              "name": "groupids.1",
+              "value": "22"
+            },
+            {
+              "type": "2",
+              "name": "groupids.2",
+              "value": "23"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "ANZAL"
+            }
+          ]
+        },
+        {
+          "widgetid": "97450",
+          "type": "hostavail",
+          "name": "Host Availability",
+          "x": "0",
+          "y": "5",
+          "width": "41",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "2",
+              "name": "groupids.0",
+              "value": "2"
+            },
+            {
+              "type": "2",
+              "name": "groupids.1",
+              "value": "22"
+            },
+            {
+              "type": "2",
+              "name": "groupids.2",
+              "value": "4"
+            },
+            {
+              "type": "0",
+              "name": "interface_type.0",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "interface_type.1",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "widgetid": "97451",
+          "type": "dataover",
+          "name": "Network Reachability",
+          "x": "41",
+          "y": "5",
+          "width": "31",
+          "height": "5",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "2",
+              "name": "groupids.0",
+              "value": "23"
+            },
+            {
+              "type": "1",
+              "name": "tags.0.tag",
+              "value": "component"
+            },
+            {
+              "type": "0",
+              "name": "tags.0.operator",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "tags.0.value",
+              "value": "network"
+            }
+          ]
+        },
+        {
+          "widgetid": "97452",
+          "type": "svggraph",
+          "name": "Gateway Latency",
+          "x": "0",
+          "y": "8",
+          "width": "20",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Gateway / Router"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "ICMP response time"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "IPDFL"
+            }
+          ]
+        },
+        {
+          "widgetid": "97453",
+          "type": "svggraph",
+          "name": "Internet Latency",
+          "x": "20",
+          "y": "8",
+          "width": "21",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Internet Reachability - Google DNS"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "ICMP response time"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "XYBFM"
+            }
+          ]
+        },
+        {
+          "widgetid": "97454",
+          "type": "svggraph",
+          "name": "Gateway Packet Loss",
+          "x": "41",
+          "y": "10",
+          "width": "31",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Gateway / Router"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "ICMP loss"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "MVKWC"
+            }
+          ]
+        },
+        {
+          "widgetid": "97455",
+          "type": "svggraph",
+          "name": "Internet Packet Loss",
+          "x": "41",
+          "y": "13",
+          "width": "31",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Internet Reachability - Google DNS"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "ICMP loss"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "PHNLG"
+            }
+          ]
+        },
+        {
+          "widgetid": "97456",
+          "type": "svggraph",
+          "name": "Linux CPU Utilization",
+          "x": "20",
+          "y": "11",
+          "width": "21",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Linux VM - Docker Host"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "CPU utilization"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "KFFOW"
+            }
+          ]
+        },
+        {
+          "widgetid": "97457",
+          "type": "svggraph",
+          "name": "Linux Memory Usage",
+          "x": "0",
+          "y": "11",
+          "width": "20",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Linux VM - Docker Host"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "Memory utilization"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "PCFFN"
+            }
+          ]
+        },
+        {
+          "widgetid": "97458",
+          "type": "svggraph",
+          "name": "Linux Disk Usage",
+          "x": "0",
+          "y": "14",
+          "width": "20",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Linux VM - Docker Host"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "FS [/]: Space: Used, in %"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "SFRIY"
+            }
+          ]
+        },
+        {
+          "widgetid": "97459",
+          "type": "svggraph",
+          "name": "Linux Network Traffic",
+          "x": "20",
+          "y": "14",
+          "width": "21",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Linux VM - Docker Host"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "Interface ens18: Bits received"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.1",
+              "value": "Interface ens18: Bits sent"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "UZXWJ"
+            }
+          ]
+        },
+        {
+          "widgetid": "97460",
+          "type": "svggraph",
+          "name": "CPU Utilization",
+          "x": "0",
+          "y": "17",
+          "width": "20",
+          "height": "4",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "WIN11"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.hosts.1",
+              "value": "ANSELEM-SERVER"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "CPU utilization"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "ILBHI"
+            }
+          ]
+        },
+        {
+          "widgetid": "97461",
+          "type": "svggraph",
+          "name": "Windows Memory Usage",
+          "x": "20",
+          "y": "17",
+          "width": "21",
+          "height": "4",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "WIN11"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.hosts.1",
+              "value": "ANSELEM-SERVER"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "Memory utilization"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "HSZVW"
+            }
+          ]
+        },
+        {
+          "widgetid": "97462",
+          "type": "svggraph",
+          "name": "Windows Disk Usage",
+          "x": "0",
+          "y": "21",
+          "width": "20",
+          "height": "4",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "WIN11"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.hosts.1",
+              "value": "ANSELEM-SERVER"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "FS [(C:)]: Space: Used, in %"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "EFMNA"
+            }
+          ]
+        },
+        {
+          "widgetid": "97463",
+          "type": "tophosts",
+          "name": "Windows Network Traffic",
+          "x": "20",
+          "y": "21",
+          "width": "21",
+          "height": "2",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "2",
+              "name": "groupids.0",
+              "value": "22"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.name",
+              "value": "ANSELEM In"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.data",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.base_color",
+              "value": ""
+            },
+            {
+              "type": "0",
+              "name": "columns.1.data",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.base_color",
+              "value": ""
+            },
+            {
+              "type": "0",
+              "name": "order",
+              "value": "3"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "HSPPD"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.item",
+              "value": "Interface Red Hat VirtIO Ethernet Adapter(LAN-MGMT): Bits received"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.name",
+              "value": "ANSELEM Out"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.item",
+              "value": "Interface Red Hat VirtIO Ethernet Adapter(LAN-MGMT): Bits sent"
+            }
+          ]
+        },
+        {
+          "widgetid": "97464",
+          "type": "tophosts",
+          "name": "WIN11 Reachability",
+          "x": "20",
+          "y": "23",
+          "width": "21",
+          "height": "2",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "3",
+              "name": "hostids.0",
+              "value": "10684"
+            },
+            {
+              "type": "3",
+              "name": "hostids.1",
+              "value": "10686"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.name",
+              "value": "Agent"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.item",
+              "value": "Zabbix agent ping"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.1.name",
+              "value": "ICMP"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.item",
+              "value": "Zabbix agent ping"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "WYFQR"
+            }
+          ]
+        },
+        {
+          "widgetid": "97465",
+          "type": "tophosts",
+          "name": "Service Availability",
+          "x": "41",
+          "y": "16",
+          "width": "31",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "3",
+              "name": "hostids.0",
+              "value": "10683"
+            },
+            {
+              "type": "3",
+              "name": "hostids.1",
+              "value": "10684"
+            },
+            {
+              "type": "3",
+              "name": "hostids.2",
+              "value": "10690"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.name",
+              "value": "Linux SSH"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.item",
+              "value": "TCP check - SSH port 22"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.1.name",
+              "value": "Linux Agent"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.item",
+              "value": "TCP check - Zabbix Agent port 10050"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.2.name",
+              "value": "Windows RDP"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.2.item",
+              "value": "TCP check - RDP port 3389"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.2.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.3.name",
+              "value": "Windows Agent"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.3.item",
+              "value": "TCP check - Zabbix Agent port 10050"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.3.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.4.name",
+              "value": "Zabbix Web"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.4.item",
+              "value": "TCP check - Zabbix Web UI port 8081"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.4.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.5.name",
+              "value": "Zabbix Server"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.5.item",
+              "value": "TCP check - Zabbix Server port 10051"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.5.base_color",
+              "value": ""
+            },
+            {
+              "type": "0",
+              "name": "order",
+              "value": "3"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "LHYJM"
+            }
+          ]
+        },
+        {
+          "widgetid": "97466",
+          "type": "tophosts",
+          "name": "Docker Summary",
+          "x": "41",
+          "y": "19",
+          "width": "31",
+          "height": "2",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "3",
+              "name": "hostids.0",
+              "value": "10683"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.name",
+              "value": "Containers Total"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.item",
+              "value": "Containers total"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.0.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.0.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.1.name",
+              "value": "Running"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.item",
+              "value": "Containers running"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.1.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.1.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.2.name",
+              "value": "Stopped"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.2.item",
+              "value": "Containers stopped"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.2.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.2.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.3.name",
+              "value": "zabbix-web"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.3.item",
+              "value": "Container /zabbix-web: Running"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.3.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.3.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.4.name",
+              "value": "zabbix-server"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.4.item",
+              "value": "Container /zabbix-server: Running"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.4.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.4.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.5.name",
+              "value": "postgres"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.5.item",
+              "value": "Container /zabbix-postgres: Running"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.5.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.5.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "columns.6.name",
+              "value": "agent2"
+            },
+            {
+              "type": "0",
+              "name": "columns.6.data",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.6.item",
+              "value": "Container /zabbix-agent2: Running"
+            },
+            {
+              "type": "0",
+              "name": "columns.6.aggregate_function",
+              "value": "0"
+            },
+            {
+              "type": "0",
+              "name": "columns.6.decimal_places",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "columns.6.display",
+              "value": "1"
+            },
+            {
+              "type": "0",
+              "name": "columns.6.history",
+              "value": "1"
+            },
+            {
+              "type": "1",
+              "name": "columns.6.base_color",
+              "value": ""
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "UPLAL"
+            }
+          ]
+        },
+        {
+          "widgetid": "97467",
+          "type": "hostavail",
+          "name": "SNMP Availability",
+          "x": "41",
+          "y": "21",
+          "width": "31",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "2",
+              "name": "groupids.0",
+              "value": "23"
+            },
+            {
+              "type": "0",
+              "name": "interface_type.0",
+              "value": "2"
+            }
+          ]
+        },
+        {
+          "widgetid": "97468",
+          "type": "item",
+          "name": "SNMP Uptime",
+          "x": "58",
+          "y": "24",
+          "width": "14",
+          "height": "2",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "4",
+              "name": "itemid.0",
+              "value": "51746"
+            },
+            {
+              "type": "0",
+              "name": "show.0",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "show.1",
+              "value": "3"
+            },
+            {
+              "type": "0",
+              "name": "show.2",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "widgetid": "97469",
+          "type": "item",
+          "name": "SNMP Interface In",
+          "x": "41",
+          "y": "24",
+          "width": "17",
+          "height": "2",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "4",
+              "name": "itemid.0",
+              "value": "51880"
+            },
+            {
+              "type": "0",
+              "name": "show.0",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "show.1",
+              "value": "3"
+            },
+            {
+              "type": "0",
+              "name": "show.2",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "widgetid": "97470",
+          "type": "item",
+          "name": "SNMP Interface Out",
+          "x": "41",
+          "y": "26",
+          "width": "31",
+          "height": "2",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "4",
+              "name": "itemid.0",
+              "value": "51895"
+            },
+            {
+              "type": "0",
+              "name": "show.0",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "show.1",
+              "value": "3"
+            },
+            {
+              "type": "0",
+              "name": "show.2",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "widgetid": "97471",
+          "type": "item",
+          "name": "SNMP Interface Errors",
+          "x": "21",
+          "y": "25",
+          "width": "20",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "4",
+              "name": "itemid.0",
+              "value": "51875"
+            },
+            {
+              "type": "0",
+              "name": "show.0",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "show.1",
+              "value": "3"
+            },
+            {
+              "type": "0",
+              "name": "show.2",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "widgetid": "97472",
+          "type": "svggraph",
+          "name": "SNMP Interface In",
+          "x": "0",
+          "y": "25",
+          "width": "21",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Linux VM - SNMP"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "Interface ens18(): Bits received"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "QUPRY"
+            }
+          ]
+        },
+        {
+          "widgetid": "97473",
+          "type": "svggraph",
+          "name": "SNMP Interface In / Out",
+          "x": "0",
+          "y": "28",
+          "width": "72",
+          "height": "3",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "1",
+              "name": "ds.0.hosts.0",
+              "value": "Linux VM - SNMP"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.0",
+              "value": "Interface ens18(): Bits received"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.items.1",
+              "value": "Interface ens18(): Bits sent"
+            },
+            {
+              "type": "1",
+              "name": "ds.0.color",
+              "value": "FF465C"
+            },
+            {
+              "type": "0",
+              "name": "righty",
+              "value": "0"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "AMQXV"
+            }
+          ]
+        },
+        {
+          "widgetid": "97477",
+          "type": "item",
+          "name": "OPNsense WAN In",
+          "x": "0",
+          "y": "31",
+          "width": "19",
+          "height": "2",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "4",
+              "name": "itemid.0",
+              "value": "52250"
+            },
+            {
+              "type": "0",
+              "name": "show.0",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "show.1",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "widgetid": "97478",
+          "type": "item",
+          "name": "OPNsense WAN Out",
+          "x": "0",
+          "y": "33",
+          "width": "19",
+          "height": "2",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "4",
+              "name": "itemid.0",
+              "value": "52268"
+            },
+            {
+              "type": "0",
+              "name": "show.0",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "show.1",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "widgetid": "97479",
+          "type": "item",
+          "name": "OPNsense Interface Errors",
+          "x": "19",
+          "y": "31",
+          "width": "16",
+          "height": "4",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "4",
+              "name": "itemid.0",
+              "value": "52244"
+            },
+            {
+              "type": "0",
+              "name": "show.0",
+              "value": "2"
+            },
+            {
+              "type": "0",
+              "name": "show.1",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "widgetid": "97480",
+          "type": "graph",
+          "name": "",
+          "x": "35",
+          "y": "31",
+          "width": "37",
+          "height": "4",
+          "view_mode": "0",
+          "fields": [
+            {
+              "type": "0",
+              "name": "source_type",
+              "value": "1"
+            },
+            {
+              "type": "4",
+              "name": "itemid.0",
+              "value": "52151"
+            },
+            {
+              "type": "1",
+              "name": "reference",
+              "value": "RUBAI"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "users": [],
+  "userGroups": []
+}
